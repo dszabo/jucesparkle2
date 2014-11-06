@@ -1,0 +1,129 @@
+<project>
+    <shortName>donuttest</shortName>
+    <fullName>DonutTest</fullName>
+    <version>1.0</version>
+    <installerFilename>${product_shortname}-${platform_name}-installer.${platform_exec_suffix}</installerFilename>
+    <componentList>
+        <component>
+            <name>default</name>
+            <description>Default Component</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <folderList>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfiles</name>
+                    <platforms>all</platforms>
+                    <shortcutList>
+                        <shortcut>
+                            <comment>Uninstall</comment>
+                            <exec>${installdir}/${uninstallerName}</exec>
+                            <icon></icon>
+                            <name>Uninstall ${product_fullname}</name>
+                            <path>${installdir}</path>
+                            <platforms>all</platforms>
+                            <runAsAdmin>0</runAsAdmin>
+                            <runInTerminal>0</runInTerminal>
+                            <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                            <windowsExecArgs></windowsExecArgs>
+                            <windowsIcon></windowsIcon>
+                            <windowsPath>${installdir}</windowsPath>
+                        </shortcut>
+                    </shortcutList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileslinux</name>
+                    <platforms>linux</platforms>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileswindows</name>
+                    <platforms>windows</platforms>
+                    <distributionFileList>
+                        <distributionFile>
+                            <origin>C:/_Projects/jucesparkle2/Builds/VisualStudio2013/x64/Debug/jucesparkle2.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/_Projects/jucesparkle2/Lib/Sparkle/Windows/release/x64/WinSparkle.dll</origin>
+                        </distributionFile>
+                    </distributionFileList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfilesosx</name>
+                    <platforms>osx</platforms>
+                </folder>
+            </folderList>
+            <startMenuShortcutList>
+                <startMenuShortcut>
+                    <comment>Uninstall ${product_fullname}</comment>
+                    <name>Uninstall ${product_fullname}</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/${uninstallerName}.exe</windowsExec>
+                    <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon></windowsIcon>
+                    <windowsPath>${installdir}/</windowsPath>
+                </startMenuShortcut>
+            </startMenuShortcutList>
+        </component>
+    </componentList>
+    <preInstallationActionList>
+        <setInstallerVariable>
+            <name>installdir</name>
+            <value>${platform_install_prefix}/${product_shortname}</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+        <actionGroup>
+            <actionList>
+                <setInstallerVariable name="project.allowComponentSelection" value="0"/>
+                <setInstallerVariable name="project.installationType" value="upgrade"/>
+                <setInstallerVariable name="project.parameter(installdir).ask" value="0"/>
+            </actionList>
+            <ruleList>
+                <fileTest condition="exists" path="${installdir}"/>
+            </ruleList>
+        </actionGroup>
+    </preInstallationActionList>
+    <postInstallationActionList>
+        <deleteFile path="${project.rollbackBackupDirectory}"/>
+    </postInstallationActionList>
+    <disableSplashScreen>1</disableSplashScreen>
+    <enableRollback>0</enableRollback>
+    <enableTimestamp>1</enableTimestamp>
+    <vendor>XycodTest</vendor>
+    <windows64bitMode>1</windows64bitMode>
+    <finalPageActionList>
+        <runProgram>
+            <program>${installdir}\jucesparkle2.exe</program>
+            <programArguments></programArguments>
+            <progressText>Do you want to launch ${project.fullName} now?</progressText>
+        </runProgram>
+    </finalPageActionList>
+    <parameterList>
+        <directoryParameter>
+            <name>installdir</name>
+            <description>Installer.Parameter.installdir.description</description>
+            <explanation>Installer.Parameter.installdir.explanation</explanation>
+            <value></value>
+            <default>${platform_install_prefix}/${product_shortname}</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>yes</ask>
+            <cliOptionName>prefix</cliOptionName>
+            <mustBeWritable>yes</mustBeWritable>
+            <mustExist>0</mustExist>
+            <width>40</width>
+        </directoryParameter>
+    </parameterList>
+</project>
+
